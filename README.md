@@ -1,12 +1,12 @@
 # 📊 Modelo de Análisis de Sentimiento Multilingüe
 
-> **Detecta automáticamente si un comentario es positivo o negativo — en inglés y español — con alta confianza y preparado para integración en entornos empresariales.**
+> **Detecta automáticamente si un comentario es positivo o negativo — en inglés, portugues y español — con alta confianza y preparado para integración en entornos empresariales.**
 
 ---
 
 ## 📌 1. Breve Descripción
 
-Este Modelo implementa un modelo de clasificación binaria de sentimiento (positivo/negativo) diseñado para analizar reseñas de clientes en servicios o productos. Utiliza un enfoque híbrido basado en reglas léxicas para preprocesamiento y etiquetado inicial, seguido por un modelo supervisado de **Regresión Logística** entrenado con representación **TF-IDF** y optimizado para manejar datos en **inglés y español**. El modelo final se exporta en formato **ONNX**, listo para integrarse en sistemas backend, incluyendo aplicaciones Java. 
+Este Modelo implementa un modelo de clasificación binaria de sentimiento (positivo/negativo) diseñado para analizar reseñas de clientes en servicios o productos. Utiliza un enfoque híbrido basado en reglas léxicas para preprocesamiento y etiquetado inicial, seguido por un modelo supervisado de **Regresión Logística** entrenado con representación **TF-IDF** y optimizado para manejar datos en **inglés, portugues y español**. El modelo final se exporta en formato **ONNX**, listo para integrarse en sistemas backend, incluyendo aplicaciones Java. 
 NOTA: Este modelo se ajustó con base en el propuesto inicialmente a dos sentimientos (Positivo/Negativo) y tiene mejor precisión al no tener en cuenta celdas con información basura 
 
 Ideal para equipos de experiencia del cliente, soporte técnico o monitoreo de reputación digital.
@@ -15,7 +15,7 @@ Ideal para equipos de experiencia del cliente, soporte técnico o monitoreo de r
 
 ## ✨ 2. Características Generales
 
-- **Clasificación binaria robusta**: Distingue entre sentimientos **positivos (1)** y **negativos (-1)**.
+- **Clasificación binaria robusta**: Distingue entre sentimientos **positivos (1)** y **negativos (0)**.
 - **Soporte multilingüe**: Entrenado con datos reales en inglés y ejemplos sintéticos en español.
 - **Manejo inteligente de casos críticos**: Palabras como *"estafa"*, *"fraude"* o *"robado"* fuerzan clasificación negativa, incluso si hay términos positivos.
 - **Detección de negaciones**: Reconoce construcciones como *"not good"* y ajusta la predicción.
@@ -47,12 +47,12 @@ Ideal para equipos de experiencia del cliente, soporte técnico o monitoreo de r
 sentiment-analysis-multilingual/
 ├── amazon_only_reviews_04.csv          # Dataset original (inglés)
 ├── amazon_final_cleaned.csv            # Dataset limpio y etiquetado
-├── sentiment_binary_multilingual.onnx  # Modelo final en formato ONNX
+├── BrandPulse.onnx                     # Modelo final en formato ONNX
 ├── historial_sentimientos.csv          # Registro acumulativo de predicciones
 ├── distribucion_binaria_sentimientos.png
 ├── reporte_grafico_binario.png         # Gráficos generados
 ├── resultado_batch_con_probabilidad.csv # Salida en lote
-└── Modelo 1.1 kari guti.ipynb          # Notebook principal (entrenamiento y exportación)
+└── Modelo brandPULSE.ipynb             # Notebook principal (entrenamiento y exportación)
 ```
 
 ---
@@ -88,7 +88,7 @@ sentiment-analysis-multilingual/
    - Procesar un archivo CSV: `procesar_predicciones(pipeline, "comentarios.csv", es_archivo=True)`
 
 5. **Descargar el modelo ONNX**  
-   El archivo `sentiment_binary_multilingual.onnx` se genera automáticamente y puede descargarse desde Colab o Drive.
+   El archivo `BrandPulse.onnx` se genera automáticamente y puede descargarse desde Colab o Drive.
 
 ---
 
@@ -131,7 +131,7 @@ El modelo se exporta a **ONNX** (Open Neural Network Exchange), un formato está
    ```
 
 3. **Interpretar salida**:  
-   - `result.get(0)` → etiqueta predicha (`-1` o `1`)  
+   - `result.get(0)` → etiqueta predicha (`0` o `1`)  
    - `result.get(1)` → probabilidades por clase
 
 > 📌 El modelo espera una entrada de tipo **StringTensor de forma [1, 1]**.
